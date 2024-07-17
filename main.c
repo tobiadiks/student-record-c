@@ -52,8 +52,8 @@ void remove_student(int row_number)
             }
 }
 
-// Main Program
 
+// List students
 void list_students()
 {
     if (table_length == 0) {
@@ -70,10 +70,31 @@ void list_students()
     }
 }
 
+// Load file
+void load_students() {
+    FILE *fptr = fopen("student_record.txt", "r");
+    // Print some text if the file does not exist
+    if(fptr == NULL) {
+        printf("Not able to open the file.");
+    }
+
+    // Store the content of the file
+    char loadedString[100];
+
+    // Read the content and store it inside myString
+    fgets(loadedString, 100, fptr);
+
+    // Print the file content
+    printf("%s\n", loadedString);
+
+    // Close the file
+    fclose(fptr);
+}
+
+// Main Program
 int main()
 {
-    FILE *fptr;
-    fptr = fopen("student_record.txt", "w");
+    FILE *fptr = fopen("student_record.txt", "w");
     char firstname[100];
     int choice;
     char save_choice;
@@ -117,6 +138,10 @@ int main()
         /* list students action */
         else if (choice == 3) {
             list_students();
+        }
+        /* load students action */
+        else if (choice == 4) {
+            load_students();
         }
 
     } while (choice != 5);
